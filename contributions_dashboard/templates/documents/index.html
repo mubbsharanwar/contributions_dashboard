@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="mb-12 text-center">
+    <div class="reveal">
+        <!-- Gradient Icon -->
+        <div class="mx-auto mb-4 inline-block rounded-full bg-gradient-to-r from-emerald-400 to-cyan-500 p-4 text-white shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M17.721 9.712A.75.75 0 0118 10.433V12.5a.75.75 0 01-1.5 0v-1.336a4.012 4.012 0 01-3.321 1.53C9.362 12.694 7 10.332 7 7.5c0-2.332 1.657-4.28 3.868-4.823A4.002 4.002 0 0115 7.5c0 1.056-.416 2.016-1.112 2.73a.75.75 0 01-1.06-1.06A2.483 2.483 0 0013.5 7.5c0-1.38-1.12-2.5-2.5-2.5S8.5 6.12 8.5 7.5c0 1.93 1.57 3.5 3.5 3.5a3.945 3.945 0 002.66-.96.75.75 0 011.061 1.06z" />
+                <path d="M10.868 2.677a.75.75 0 01.132 1.493A2.486 2.486 0 0013.5 7.5c0 1.38-1.12 2.5-2.5 2.5S8.5 8.88 8.5 7.5c0-1.93 1.57-3.5 3.5-3.5a3.945 3.945 0 012.66.96.75.75 0 111.06-1.06A5.445 5.445 0 0012 2c-3.038 0-5.5 2.462-5.5 5.5s2.462 5.5 5.5 5.5c2.23 0 4.145-1.336 4.979-3.268a.75.75 0 111.442.434A6.994 6.994 0 0112 14.5C7.858 14.5 4.5 11.142 4.5 7S7.858 2 12 2c.237 0 .473.012.709.036a.75.75 0 01.159.641z" />
+            </svg>
+        </div>
+
+        <!-- Page Title -->
+        <h1 class="text-5xl font-extrabold tracking-tight text-gray-800 sm:text-6xl">Documents</h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+            Browse documents for our projects. Each document provides insight and guidance to help you contribute effectively.
+        </p>
+    </div>
+</section>
+
+<!-- Grid of Documents -->
+<section class="project-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for doc in documents %}
+        <div class="project-card reveal group rounded-xl shadow-lg overflow-hidden transition transform hover:scale-105">
+            <a href="{% url 'home:document_detail' doc.pk %}" class="block">
+                <!-- Card Background (changes on hover) -->
+                <div class="relative aspect-video flex items-center justify-center bg-gray-200 transition-colors duration-300 group-hover:bg-[rgba(0,0,0,0.5)]">
+                    <span class="text-5xl font-bold text-gray-400 group-hover:text-white">
+                        {{ doc.title.0|upper }}
+                    </span>
+
+                    <!-- Hover button -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white font-bold py-2 px-4 rounded-full border-2 border-white">
+                            View Document
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card Content -->
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800 group-hover:text-white">{{ doc.title }}</h3>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <p class="text-gray-600 italic">No documents available.</p>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="project-detail-container reveal max-w-4xl mx-auto py-12">
+    <!-- Header -->
+    <header class="text-center mb-8">
+        <div class="project-icon-placeholder mx-auto mb-4 w-20 h-20 flex items-center justify-center rounded-full bg-gray-200 text-4xl font-bold text-gray-400">
+            {{ document.title.0|upper }}
+        </div>
+
+        <h1 class="project-title text-4xl font-extrabold mb-2 text-gray-800">
+            {{ document.title }}
+        </h1>
+
+        {% if document.project %}
+            <p class="text-gray-600">
+                Related Project:
+                <span class="font-semibold">{{ document.project.title }}</span>
+            </p>
+        {% endif %}
+    </header>
+
+    <!-- Links Section -->
+    <section class="document-links">
+        {% if document.links.all %}
+            <div class="contribution-feed space-y-4">
+                {% for link in document.links.all %}
+                    <div class="feed-item flex items-start gap-4 bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition">
+                        <div class="feed-icon flex-shrink-0">
+                            <div class="text-emerald-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="feed-content flex-1">
+                            <p class="feed-text text-gray-700">
+                                <a href="{{ link.url }}" target="_blank"
+                                   class="font-semibold text-emerald-600 hover:underline">
+                                    {{ link.title }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-500 italic">No links available in this document.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

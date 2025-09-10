@@ -1,0 +1,101 @@
+{% load static sekizai_tags cms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Project Management Dashboard" />
+
+    <title>
+      {% block title %}Opensource Contributions{% endblock %}
+    </title>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    {% render_block "css" %}
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body class="relative min-h-screen bg-body font-sans text-gray-800">
+    <!-- Gradient Backgrounds -->
+    <div aria-hidden="true"
+         class="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+      <div class="absolute -left-24 -top-24 h-72 w-72 transform rotate-12 rounded-full 
+                  bg-gradient-to-br from-pink-200/50 to-orange-100/50 opacity-80 blur-3xl">
+      </div>
+      <div class="absolute left-1/2 top-1/3 h-[60rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 
+                  rounded-full bg-gradient-to-br from-pink-100/40 via-emerald-50/25 
+                  to-orange-50/20 opacity-60 blur-3xl">
+      </div>
+      <div class="absolute -bottom-32 -right-32 h-96 w-96 transform -rotate-6 rounded-full 
+                  bg-gradient-to-tr from-cyan-500/20 to-pink-500/10 opacity-80 blur-3xl">
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-30 bg-white/80 shadow-sm backdrop-blur-md">
+      <div class="container mx-auto flex h-16 items-center justify-between">
+        
+        <!-- 🔹 Logo -->
+        <a href="/" class="flex items-center gap-2.5">
+          <div class="bg-gradient-logo flex h-10 w-10 items-center justify-center rounded-lg text-white"
+               aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-8 w-8"
+                 viewBox="0 0 24 24"
+                 fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 
+                       10 10 10-4.48 10-10S17.52 2 12 2zm-2.83 
+                       4.56c.45-.45 1.18-.45 1.63 0 .45.45.45 
+                       1.18 0 1.63-.45.45-1.18.45-1.63 
+                       0-.45-.45-.45-1.18 0-1.63zM15 
+                       12.5a1 1 0 01-2 0v-1a1 1 0 112 
+                       0v1zm-2.5 5.5c-2.48 0-4.5-2.02-4.5-4.5a1 
+                       1 0 112 0c0 1.38 1.12 2.5 2.5 
+                       2.5s2.5-1.12 2.5-2.5a1 1 0 112 
+                       0c0 2.48-2.02 4.5-4.5 4.5z" />
+            </svg>
+          </div>
+          <div class="hidden sm:block">
+            <div class="font-semibold text-gray-800">Arbisoft</div>
+            <div class="text-sm text-gray-500">The Open-Source Garden</div>
+          </div>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex items-center gap-8 text-sm" aria-label="Main navigation">
+          <a href="/project" class="font-medium text-gray-600 transition hover:text-accent">Projects</a>
+          <a href="/developer" class="font-medium text-gray-600 transition hover:text-accent">Developers</a>
+          <a href="/document" class="font-medium text-gray-600 transition hover:text-accent">Documents</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container relative z-10 mx-auto py-12">
+      {% block content %}
+        {% placeholder "content" %}
+      {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="wavy-border relative z-10 mt-20 pt-12 pb-8">
+      <div class="container mx-auto text-center">
+        <h3 class="text-2xl font-bold">
+          Built with <span class="text-primary">❤️</span> Django CMS
+        </h3>
+        <div class="mt-4 flex justify-center gap-6 text-gray-400">
+          <a href="https://github.com/django-cms/django-cms" class="hover:text-primary">GitHub</a>
+        </div>
+        <div class="mt-8 text-sm text-gray-400">©{% now "Y" %} Project Manager. All rights reserved.</div>
+      </div>
+    </footer>
+
+    {% cms_toolbar %}
+    {% render_block "js" %}
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
